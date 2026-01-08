@@ -1,0 +1,49 @@
+@use "../global/" as *;
+
+
+#voucher{
+    display: flex;
+    flex-direction: column;
+    
+    width: auto;
+    gap: 1rem;
+    
+    padding: 1.5rem 0;
+    border-radius: 2rem;
+    
+    .home{
+        margin-top: 3rem;
+    }
+
+    .bottom{
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        .form{
+            display: flex;
+            gap: 0.5rem;
+
+            
+    
+            input{
+                padding: 0.1rem 0.3rem;
+                background-color: $dark-15;
+                border: 1px solid $primary-color;
+                border-radius: 2rem;
+                text-align: center;
+                color: white;
+            }
+
+            button{
+                background-color: $dark-15;
+                padding: 0.5rem 1rem;
+                border-radius: 2rem;
+
+                border: 1px solid cyan;
+                color: white;
+
+            }
+        }
+    }
+    
+}

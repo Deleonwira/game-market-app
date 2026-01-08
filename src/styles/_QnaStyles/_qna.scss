@@ -1,0 +1,43 @@
+@use "../global/" as *;
+
+
+#qna{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    justify-content: center;
+
+    
+    
+    .qna{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: none;
+        padding: 1rem 0;
+        
+
+        .button{
+            display: flex;
+            justify-content: space-between;
+            background-color: #1b1b1b;
+            border: none;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            align-items: center;
+            color: $absolute-white;
+        }
+
+        p{
+            display: none;
+            padding: 0 1rem;
+            line-height: 200%;
+
+        }
+
+    }
+
+
+
+    
+}

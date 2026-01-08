@@ -1,0 +1,90 @@
+
+@use "../global/" as *;
+
+
+#footer{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	
+	max-width: 50rem;
+	margin: 3rem auto 0 auto;
+	
+	
+	.image{
+		display: flex;
+		position: relative;
+		
+		
+
+		img{
+			position: absolute;
+			opacity: 0.1;
+			object-position: center;
+			object-fit: cover;
+			width: 100%;
+			height: 15.5rem;
+			border-radius: 3rem;
+			
+			
+		}
+
+		&::after{
+			content: '';
+			width: 100%;
+			height: 15.5rem;
+			position: absolute;
+			box-shadow: 
+            
+            0px 20px 90px 20px  #1b1b1b inset;
+			z-index: 87;
+		}
+	}
+	
+	
+
+
+	h3{
+		position: absolute;
+		z-index: 88;
+	}
+
+
+	p{
+		color: $dark-70;
+	}
+
+	.col{
+		border-left: 1px solid $dark-15;
+		display: flex;
+		flex-direction: column;
+		padding: 1rem 1rem;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		
+
+		ul{
+			display: flex;
+			gap: 1rem;
+
+			li{
+				list-style: none;
+				text-decoration: none;
+				column-rule: $dark-70;
+			}
+		}
+
+		.social-media{
+			display: flex;
+			gap: 1rem;
+		}
+	}
+
+	.right{
+		justify-content: center;
+		align-items: center;
+	}
+}

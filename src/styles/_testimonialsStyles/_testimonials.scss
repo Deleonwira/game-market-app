@@ -1,0 +1,33 @@
+@use "../global/" as *;
+
+
+#testimonials{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+    margin-top: 5rem;
+    gap: 1.2rem;
+
+
+    .images{
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        height: 7rem;
+        justify-content: center;
+    
+
+        a{
+            display: flex;
+        }
+
+        img{
+            width: 100%;
+            max-width: fit-content;
+            border-radius: 2rem;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}

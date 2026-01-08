@@ -1,0 +1,32 @@
+
+@use "../global/" as *;
+
+
+#navbar{
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    margin: 0 auto !important;
+    
+    width: 100%;
+    max-width: 52rem;
+    z-index: 999;
+
+
+
+    h2{
+        color: $secondary-color;
+    }
+    
+
+
+    button{
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        color: $absolute-white;
+    }
+}

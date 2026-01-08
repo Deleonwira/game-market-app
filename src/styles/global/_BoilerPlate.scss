@@ -1,0 +1,164 @@
+@use "./color" as *;
+@use "./typhography" as *;
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  @media (max-width: 768px) {
+    :root{
+        font-size: 11px;
+      }
+  }
+
+  @media (min-width: 768px) and (max-width: 20000px) {
+    :root{
+        font-size: 11px;
+      }
+
+    .container{
+      padding: 2rem 2% !important;
+    }
+      
+  }
+  
+  
+  body {
+    background-color: #1b1b1b;
+    font-family: $font-family;
+    color: $absolute-white;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    a{
+      color:  cyan;
+  }
+
+    button{
+      cursor: pointer;
+    }
+
+    .loading{
+      font-size: 2rem;
+      margin: 40%;
+    }
+
+
+    h1{
+        font-size: $h1-size;
+    }
+
+    h2{
+        font-size: $h2-size;
+        line-height: 150%;
+    }
+
+    h3{
+        font-size: $h3-size;
+        line-height: 150%;
+    }
+
+    h4{
+        font-size: $h4-size;
+        line-height: 150%;
+    }
+
+    h5{
+      font-size: $h5-size;
+        line-height: 150%;
+    }
+
+    p{
+        font-size: $p-size;
+        line-height: 150%;
+    }
+  }
+
+  
+  
+  .container {
+    max-width: 50rem;
+    position: relative;
+    margin: 0 auto !important;
+    padding: 2rem 4.5% 0 4.5%;
+    border: 2px solid $dark-15;
+    border-top: none;
+  }
+  
+  // scroll bar ------
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Firefox */
+  
+
+
+  @keyframes react-loading-skeleton {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .react-loading-skeleton {
+    --base-color: #252525 !important;
+    --highlight-color: #2f2f2f !important;
+    --animation-duration: 0.8s !important;
+    --animation-direction: ltr;
+    --pseudo-element-display: block !important; /* Enable animation */
+  
+    background-color: var(--base-color);
+  
+    width: 100%;
+    
+    border-radius: 0.25rem;
+    display: inline-flex;
+    line-height: 1;
+  
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+    z-index: 9999; /* Necessary for overflow: hidden to work correctly in Safari */
+  }
+  
+  .react-loading-skeleton::after {
+    content: ' ';
+    display: var(--pseudo-element-display);
+    position: absolute;
+    top: 0px !important;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(
+      90deg,
+      var(--base-color),
+      var(--highlight-color),
+      var(--base-color)
+    );
+    transform: translateX(-100%);
+  
+    animation-name: react-loading-skeleton;
+    animation-direction: var(--animation-direction);
+    animation-duration: var(--animation-duration);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  
+  @media (prefers-reduced-motion) {
+    .react-loading-skeleton {
+      --pseudo-element-display: block; /* Disable animation */
+    }
+  }
+  

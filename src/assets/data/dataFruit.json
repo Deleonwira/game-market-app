@@ -1,0 +1,53 @@
+[
+    {
+        "judul": "Dragon",
+        "img": "https://i.ibb.co/309qmhx/thumbnail-fruit-dragon.jpg",
+        "harga": "Rp 25.000",
+        "sold": 1,
+        "cardId": 29011
+    },
+
+    {
+        "judul": "Venom",
+        "img": "https://i.ibb.co/mHjZrhc/thumbnail-fruit-venom.jpg",
+        "harga": "Rp 6.000",
+        "sold": 0,
+        "cardId": 19718
+    },
+
+    {
+        "judul": "Spirit",
+        "img": "https://i.ibb.co/z8c9Pyq/thumbnail-fruit-spirit.jpg",
+        "harga": "Rp 5.000",
+        "sold": 0,
+        "cardId": 12918
+    },
+
+    {
+        "judul": "Dough",
+        "img": "https://i.pinimg.com/564x/41/93/8c/41938cba4dd0631d8d7311ae3021a9df.jpg",
+        "harga": "Rp 15000",
+        "sold": 0,
+        "cardId": 12918
+    },
+
+    {
+        "judul": "Mammoth",
+        "img": "https://i.pinimg.com/736x/55/2f/63/552f639594479a9ff26383758b53dd03.jpg",
+        "harga": "Rp 6000",
+        "sold": 0,
+        "cardId": 12918
+    },
+
+    {
+        "judul": "Trex",
+        "img": "https://i.pinimg.com/736x/66/c9/e8/66c9e822bdba7acd0256791cb91a5404.jpg",
+        "harga": "Rp 6000",
+        "sold": 0,
+        "cardId": 12918
+    }
+]
+
+
+
+
