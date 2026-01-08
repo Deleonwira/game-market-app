@@ -1,5 +1,3 @@
-
-
 import Header from '../components/Header/Header'
 import Qna from '../components/Qna/Qna'
 import Sold from '../components/Sold/Sold'
@@ -15,11 +13,11 @@ import $ from 'jquery';
 
 
 
-const HomeBloxFruit = () => {
+const HomePage = () => {
   const [voucher, isVoucher] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  function handleVoucher() {
+    function handleVoucher() {
     const voucherCode = $('.val-voucher').val();
     if (voucherCode === 'CATMIDKECEasdasiud') {
       isVoucher(true);
@@ -35,25 +33,16 @@ const HomeBloxFruit = () => {
   
 
   useEffect(() => {
-    // Menampilkan animasi loading
-    showLoading();
-
     // Menyembunyikan animasi loading setelah 3 detik (3000 milidetik)
     const timeoutId = setTimeout(() => {
-      hideLoading();
+      setLoading(false);
     }, 500);
 
     // Membersihkan timeout jika komponen dibongkar sebelum waktu habis
     return () => clearTimeout(timeoutId);
   }, []);
 
-  const showLoading = () => {
-    setLoading(true);
-  };
 
-  const hideLoading = () => {
-    setLoading(false);
-  };
 
 
   return (
@@ -80,4 +69,4 @@ const HomeBloxFruit = () => {
   )
 }
 
-export default HomeBloxFruit
+export default HomePage

@@ -1,35 +1,23 @@
 
 import "./styles/dist/style.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dagangan from "./pages/Dagangan";
-import HomeBloxFruit from "./pages/Home-Bloxfruit";
-import Home from "./pages/Home";
-import Payment from "./pages/Payment";
-
-
-// import {
-//   QueryClient,
-//   QueryClientProvider,
-//   useQuery,
-// } from '@tanstack/react-query'
-// import Example from "./pages/Example";
-
-// const queryClient = new QueryClient()
+import ProductDetailPage from "./pages/ProductDetailPage";
+import HomePage from "./pages/HomePage";
+import SplashPage from "./pages/SplashPage";
+import PaymentPage from "./pages/PaymentPage";
 
 function App() {
 
   return (
     <>
-    
       <BrowserRouter>
-        <Routes>
-          <Route index element={<Home/>}/>
-          <Route path="/blox-fruit" element={<HomeBloxFruit/>}  />
-          <Route path={'/dagangan/:productId'} element={<Dagangan  />} />
-          <Route path={'/dagangan/:productId/payment'} element={<Payment/>}/>
+          <Routes>
+          <Route index element={<SplashPage/>}/>
+          <Route path="/blox-fruit" element={<HomePage/>}  />
+          <Route path={'/dagangan/:productId'} element={<ProductDetailPage  />} />
+          <Route path={'/dagangan/:productId/payment'} element={<PaymentPage/>}/>
         </Routes>
-      </BrowserRouter>
-      
+      </BrowserRouter>      
     </>
       
       

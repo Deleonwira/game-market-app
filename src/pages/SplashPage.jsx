@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 
-const Home = () => {
+const SplashPage = () => {
   return (
     <section id='home'>
 
@@ -44,4 +44,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default SplashPage

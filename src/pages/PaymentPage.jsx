@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import dataAkun from "../assets/data/dataAkun.json";
 
-const Payment = () => {
+const PaymentPage = () => {
 
     const {productId} = useParams(); //untuk mengambil props id path
     
@@ -14,4 +14,4 @@ const Payment = () => {
   )
 }
 
-export default Payment
+export default PaymentPage
