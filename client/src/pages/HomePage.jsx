@@ -1,15 +1,13 @@
 import Header from '../components/Header/Header'
 import Qna from '../components/Qna/Qna'
-import Sold from '../components/Sold/Sold'
 import Testimonials from '../components/Testimonials/Testimonials'
-import CardAkun from '../components/Card/CardAkun'
-import CardFruit from '../components/Card/CardFruit'
 import Footer from '../components/Footer/Footer'
 import Navbar from '../components/Navbar/Navbar'
 import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import Voucher from '../components/Voucher/Voucher';
 import $ from 'jquery';
+import CardCategory from '../components/Card/CardCategory'
 
 
 
@@ -55,12 +53,12 @@ const HomePage = () => {
      <Navbar loading={loading}/>
         <Header loading={loading}/>
         <div className="container">
-            <CardAkun loading ={loading} voucher={voucher}/>
-            <CardFruit loading ={loading}/>
-            <Sold/>
-            <Voucher handleVoucher={handleVoucher}/>
-            <Testimonials/>
-            <Qna/>
+          <CardCategory title="akun" loading={loading} voucher={voucher} />
+          <CardCategory title="fruit" loading={loading} />
+          <CardCategory title="sold" />
+          <Voucher handleVoucher={handleVoucher} />
+          <Testimonials />
+          <Qna />
         </div>
 
     <Footer/>
