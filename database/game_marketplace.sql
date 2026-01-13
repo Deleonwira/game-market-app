@@ -3,13 +3,14 @@
 -- Designed for multi-game marketplace (MVP-ready, scalable)
 -- =====================================================
 
--- Drop tables if exist (for clean import)
+-- Drop tables if exist (order matters for foreign keys)
 DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS product_attributes;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS games;
+DROP TABLE IF EXISTS platforms;
 DROP TABLE IF EXISTS users;
 
 -- =====================================================
@@ -30,19 +31,34 @@ CREATE TABLE users (
 );
 
 -- =====================================================
+-- TABLE: platforms
+-- Platform game (e.g., Roblox, Steam, Mobile, etc.)
+-- =====================================================
+CREATE TABLE platforms (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    slug VARCHAR(100) NOT NULL UNIQUE,
+    icon_url VARCHAR(500),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- =====================================================
 -- TABLE: games
--- Katalog jenis game yang tersedia di marketplace
+-- Katalog game yang tersedia dalam platform
 -- =====================================================
 CREATE TABLE games (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL UNIQUE,
+    platform_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
     slug VARCHAR(100) NOT NULL UNIQUE,
     description TEXT,
     icon_url VARCHAR(500),
     banner_url VARCHAR(500),
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (platform_id) REFERENCES platforms(id) ON DELETE CASCADE
 );
 
 -- =====================================================
@@ -70,7 +86,6 @@ CREATE TABLE products (
 -- =====================================================
 -- TABLE: product_attributes
 -- Atribut dinamis untuk tiap produk (key-value pairs)
--- Contoh: level, username, items, gamepass, dll
 -- =====================================================
 CREATE TABLE product_attributes (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -146,13 +161,29 @@ INSERT INTO users (email, password, name, phone, role) VALUES
 ('admin@catmid.com', '$2y$10$hashedpassword123', 'Admin CatMid', '081234567890', 'admin'),
 ('customer@example.com', '$2y$10$hashedpassword456', 'John Doe', '081234567891', 'customer');
 
--- Insert Games
-INSERT INTO games (name, slug, description, icon_url, is_active) VALUES
-('Blox Fruits', 'blox-fruit', 'Roblox Blox Fruits game accounts and items', 'https://example.com/bloxfruit-icon.png', TRUE),
-('Growtopia', 'growtopia', 'Growtopia game accounts and world locks', 'https://example.com/growtopia-icon.png', TRUE),
-('Mobile Legends', 'mobile-legends', 'Mobile Legends Bang Bang accounts', 'https://example.com/mlbb-icon.png', TRUE);
+-- Insert Platforms
+INSERT INTO platforms (name, slug, icon_url) VALUES
+('Roblox', 'roblox', 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg'),
+('Growtopia', 'growtopia', 'https://example.com/growtopia-logo.png'),
+('Mobile Legends', 'mobile-legends', 'https://example.com/mlbb-logo.png');
 
--- Insert Sample Products (Blox Fruit Accounts)
+-- Insert Games
+-- Roblox Games (Platform ID 1)
+INSERT INTO games (platform_id, name, slug, description, icon_url) VALUES
+(1, 'Blox Fruits', 'blox-fruit', 'Roblox Blox Fruits game accounts and items', 'https://example.com/bloxfruit-icon.png'),
+(1, 'Pet Simulator 99', 'pet-simulator-99', 'Pet Simulator 99 accounts and gems', 'https://example.com/ps99-icon.png'),
+(1, 'Adopt Me', 'adopt-me', 'Adopt Me pets and accounts', 'https://example.com/adoptme-icon.png');
+
+-- Growtopia (Platform ID 2)
+INSERT INTO games (platform_id, name, slug, description, icon_url) VALUES
+(2, 'Growtopia', 'growtopia-game', 'Growtopia accounts and DLs', 'https://example.com/growtopia-icon.png');
+
+-- Mobile Legends (Platform ID 3)
+INSERT INTO games (platform_id, name, slug, description, icon_url) VALUES
+(3, 'Mobile Legends', 'mlbb-game', 'Mobile Legends Bang Bang accounts', 'https://example.com/mlbb-icon.png');
+
+
+-- Insert Sample Products (Blox Fruit Accounts - Game ID 1)
 INSERT INTO products (game_id, title, description, price, thumbnail_url, status, is_featured) VALUES
 (1, 'V4 Shark All V3 + Sword Bejibun + PERM', 'Akun lengkap dengan V4 Shark, semua V3 race, dan PERM fruits', 135000.00, 'https://i.ibb.co/syKrpcY/thumbnail-akun-yllus.jpg', 'available', TRUE),
 (1, 'V4 Ghoul + Awaken Ice Fruit + CDK SG', 'Akun dengan V4 Ghoul dan Awaken Ice Fruit', 59000.00, 'https://i.ibb.co/xfSrsRr/thumbnail-akun-than.jpg', 'available', FALSE),
@@ -215,8 +246,8 @@ INSERT INTO payments (order_id, payment_method, payment_channel, amount, status,
 -- USEFUL VIEWS
 -- =====================================================
 
--- View: Products with game name and attribute count
-CREATE OR REPLACE VIEW v_products_summary AS
+-- View: Products with game and platform info
+CREATE OR REPLACE VIEW v_products_detailed AS
 SELECT 
     p.id,
     p.title,
@@ -225,25 +256,12 @@ SELECT
     p.sold_count,
     g.name AS game_name,
     g.slug AS game_slug,
+    pl.name AS platform_name,
+    pl.slug AS platform_slug,
     (SELECT COUNT(*) FROM product_attributes WHERE product_id = p.id) AS attribute_count
 FROM products p
-JOIN games g ON p.game_id = g.id;
-
--- View: Order details with user info
-CREATE OR REPLACE VIEW v_orders_detail AS
-SELECT 
-    o.id,
-    o.order_number,
-    o.total_amount,
-    o.status AS order_status,
-    u.name AS customer_name,
-    u.email AS customer_email,
-    p.status AS payment_status,
-    p.payment_method,
-    o.created_at
-FROM orders o
-JOIN users u ON o.user_id = u.id
-LEFT JOIN payments p ON o.id = p.order_id;
+JOIN games g ON p.game_id = g.id
+JOIN platforms pl ON g.platform_id = pl.id;
 
 -- =====================================================
 -- END OF DATABASE SCHEMA

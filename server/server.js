@@ -31,9 +31,12 @@ app.get('/api/products', (req, res) => {
             p.is_featured,
             p.created_at,
             g.name AS game_name,
-            g.slug AS game_slug
+            g.slug AS game_slug,
+            pl.name AS platform_name,
+            pl.slug AS platform_slug
         FROM products p
         JOIN games g ON p.game_id = g.id
+        JOIN platforms pl ON g.platform_id = pl.id
         WHERE 1=1
     `;
 
@@ -47,6 +50,13 @@ app.get('/api/products', (req, res) => {
     if (status) {
         query += ' AND p.status = ?';
         params.push(status);
+    }
+    
+    // Optional: Filter by platform
+    const { platform } = req.query;
+    if (platform) {
+        query += ' AND pl.slug = ?';
+        params.push(platform);
     }
 
     query += ' ORDER BY p.is_featured DESC, p.created_at DESC';
@@ -107,9 +117,12 @@ app.get('/api/products/:id', (req, res) => {
         SELECT 
             p.*,
             g.name AS game_name,
-            g.slug AS game_slug
+            g.slug AS game_slug,
+            pl.name AS platform_name,
+            pl.slug AS platform_slug
         FROM products p
         JOIN games g ON p.game_id = g.id
+        JOIN platforms pl ON g.platform_id = pl.id
         WHERE p.id = ?
     `;
 
@@ -153,11 +166,31 @@ app.get('/api/products/:id', (req, res) => {
 });
 
 /**
+ * GET /api/platforms
+ * Get all active platforms
+ */
+app.get('/api/platforms', (req, res) => {
+    db.query('SELECT * FROM platforms WHERE is_active = TRUE', (err, result) => {
+        if (err) {
+            console.error('Error fetching platforms:', err);
+            return res.status(500).json({ error: 'Database error' });
+        }
+        res.json(result);
+    });
+});
+
+/**
  * GET /api/games
- * Get all active games
+ * Get all active games with platform info
  */
 app.get('/api/games', (req, res) => {
-    db.query('SELECT * FROM games WHERE is_active = TRUE', (err, result) => {
+    const query = `
+        SELECT g.*, pl.name as platform_name, pl.slug as platform_slug 
+        FROM games g
+        JOIN platforms pl ON g.platform_id = pl.id
+        WHERE g.is_active = TRUE
+    `;
+    db.query(query, (err, result) => {
         if (err) {
             console.error('Error fetching games:', err);
             return res.status(500).json({ error: 'Database error' });
