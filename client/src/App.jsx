@@ -1,5 +1,5 @@
 
-import "./styles/dist/style.css";
+import "./styles/main.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import HomePage from "./pages/HomePage";
