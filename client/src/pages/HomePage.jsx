@@ -50,16 +50,16 @@ const HomePage = () => {
         <meta name='description' content='Menyediakan Akun Blox Fruit yang super murah dan anti hb 100%' />
         <meta name='keywords' content='blox fruit, roblox, beli akun,beli fruit'/>
       </Helmet>
-     <Navbar loading={loading}/>
-        <Header loading={loading}/>
-        <div className="container">
+      <Navbar loading={loading}/>
+      <Header loading={loading}/>
+      <div className="container">
           <CardCategory title="akun" loading={loading} voucher={voucher} />
           <CardCategory title="fruit" loading={loading} />
           <CardCategory title="sold" />
           <Voucher handleVoucher={handleVoucher} />
           <Testimonials />
           <Qna />
-        </div>
+      </div>
 
     <Footer/>
     </div>
