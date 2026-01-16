@@ -1,0 +1,431 @@
+@use "../global/color" as *;
+
+#payment-page {
+    min-height: 100vh;
+    padding-bottom: 2rem;
+
+    .order-summary {
+        background: $dark-15;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: $light-95;
+
+            .icon {
+                font-size: 1.2rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+        }
+
+        .product-card {
+            display: flex;
+            gap: 1rem;
+            background: $dark-20;
+            border-radius: 0.75rem;
+            padding: 1rem;
+
+            .product-image {
+                width: 80px;
+                height: 80px;
+                border-radius: 0.5rem;
+                object-fit: cover;
+            }
+
+            .product-info {
+                flex: 1;
+
+                .product-title {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: $absolute-white;
+                    margin-bottom: 0.25rem;
+                }
+
+                .product-game {
+                    font-size: 0.85rem;
+                    color: $dark-70;
+                    margin-bottom: 0.5rem;
+                }
+
+                .product-price {
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                    color: $secondary-color;
+                }
+
+                .original-price {
+                    font-size: 0.85rem;
+                    color: $dark-70;
+                    text-decoration: line-through;
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+
+    .payment-method {
+        background: $dark-15;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: $light-95;
+
+            .icon {
+                font-size: 1.2rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+        }
+
+        .method-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+
+            .method-option {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 1rem;
+                background: $dark-20;
+                border: 2px solid transparent;
+                border-radius: 0.75rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background: $dark-30;
+                }
+
+                &.selected {
+                    border-color: $primary-60;
+                    background: rgba($primary-60, 0.1);
+                }
+
+                input[type="radio"] {
+                    display: none;
+                }
+
+                .radio-custom {
+                    width: 20px;
+                    height: 20px;
+                    border: 2px solid $dark-70;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.2s ease;
+
+                    &::after {
+                        content: '';
+                        width: 10px;
+                        height: 10px;
+                        background: $primary-60;
+                        border-radius: 50%;
+                        opacity: 0;
+                        transform: scale(0);
+                        transition: all 0.2s ease;
+                    }
+                }
+
+                &.selected .radio-custom {
+                    border-color: $primary-60;
+
+                    &::after {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+
+                .method-icon {
+                    width: 40px;
+                    height: 40px;
+                    background: $dark-15;
+                    border-radius: 0.5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.5rem;
+                }
+
+                .method-info {
+                    flex: 1;
+
+                    .method-name {
+                        font-size: 1rem;
+                        font-weight: 600;
+                        color: $absolute-white;
+                    }
+
+                    .method-desc {
+                        font-size: 0.8rem;
+                        color: $dark-70;
+                    }
+                }
+            }
+        }
+    }
+
+    .buyer-info {
+        background: $dark-15;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: $light-95;
+
+            .icon {
+                font-size: 1.2rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+
+            label {
+                display: block;
+                font-size: 0.9rem;
+                color: $dark-70;
+                margin-bottom: 0.5rem;
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                padding: 0.875rem 1rem;
+                background: $dark-20;
+                border: 2px solid $dark-30;
+                border-radius: 0.75rem;
+                color: $absolute-white;
+                font-size: 1rem;
+                transition: border-color 0.2s ease;
+
+                &:focus {
+                    outline: none;
+                    border-color: $primary-60;
+                }
+
+                &::placeholder {
+                    color: $dark-40;
+                }
+            }
+
+            textarea {
+                resize: vertical;
+                min-height: 80px;
+            }
+        }
+    }
+
+    .price-summary {
+        background: $dark-15;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+
+            .label {
+                color: $dark-70;
+                font-size: 0.95rem;
+            }
+
+            .value {
+                color: $absolute-white;
+                font-weight: 600;
+            }
+
+            &.discount .value {
+                color: $primary-60;
+            }
+
+            &.total {
+                border-top: 1px solid $dark-30;
+                margin-top: 0.5rem;
+                padding-top: 1rem;
+
+                .label {
+                    color: $absolute-white;
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                }
+
+                .value {
+                    font-size: 1.3rem;
+                    color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    .voucher-section {
+        background: $dark-15;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: $light-95;
+
+            .icon {
+                font-size: 1.2rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+        }
+
+        .voucher-input-wrapper {
+            display: flex;
+            gap: 0.75rem;
+
+            input {
+                flex: 1;
+                padding: 0.875rem 1rem;
+                background: $dark-20;
+                border: 2px solid $dark-30;
+                border-radius: 0.75rem;
+                color: $absolute-white;
+                font-size: 1rem;
+
+                &:focus {
+                    outline: none;
+                    border-color: $primary-60;
+                }
+            }
+
+            button {
+                padding: 0.875rem 1.5rem;
+                background: $primary-color;
+                border: none;
+                border-radius: 0.75rem;
+                color: $absolute-white;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background: lighten($primary-color, 10%);
+                }
+
+                &:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+            }
+        }
+
+        .voucher-applied {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: rgba($primary-60, 0.1);
+            border: 1px solid $primary-60;
+            border-radius: 0.75rem;
+            color: $primary-60;
+
+            .voucher-code {
+                font-weight: 600;
+            }
+
+            .remove-voucher {
+                margin-left: auto;
+                background: none;
+                border: none;
+                color: $tertiary-color;
+                cursor: pointer;
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    .checkout-button {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        background: linear-gradient(to top, $main-bg-color 80%, transparent);
+
+        .container {
+            max-width: 50rem;
+            margin: 0 auto;
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, $primary-color, $tertiary-color);
+            border: none;
+            border-radius: 1rem;
+            color: $absolute-white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba($primary-color, 0.3);
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 25px rgba($primary-color, 0.4);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+
+            .icon {
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    // Add bottom padding for fixed button
+    .content-wrapper {
+        padding-bottom: 100px;
+    }
+}
