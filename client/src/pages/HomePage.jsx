@@ -59,6 +59,7 @@ const HomePage = () => {
           <Voucher handleVoucher={handleVoucher} />
           <Testimonials />
           <Qna />
+          <div></div>
       </div>
 
     <Footer/>
